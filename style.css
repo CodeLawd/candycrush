@@ -1,0 +1,19 @@
+
+.grid {
+    width: 560px;
+    height: 560px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    border: 5px solid rgb(185, 185, 185);
+    border-radius: 5px;
+    
+    align-content: center;
+    margin: 0 auto
+}
+
+.grid div {
+    width: 70px;
+    height: 70px;
+    /* padding: 15px */
+}
