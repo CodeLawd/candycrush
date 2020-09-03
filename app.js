@@ -96,6 +96,22 @@ function dragEnd() {
     console.log(this.id, "dragend")
 }
 
+// Drop candies down once some are cleared
+function moveDown(){
+    for (i=0; i < 55; i++){
+        if(squares[i + width].style.backgroundImage === ""){
+            squares[i + width].style.backgroundImage = squares[i].style.backgroundImage;
+            squares[i].style.backgroundImage = "";
+            const firstRow = [0, 1, 2, 3, 4, 5, 6, 7];
+            const isFirstRow = firstRow.includes(i);
+            if(isFirstRow && squares[i].style.backgroundImage === ""){
+                let randomCandies = Math.floor(Math.random() * candyColors.length);
+                squares[i].style.backgroundImage = candyColors[randomCandies]
+            }
+        }
+    }
+}
+
 // Checking for matches
 
 // Check for three
@@ -145,7 +161,7 @@ checkRowForFour = () => {
         if(notValid.includes(i)) continue;
 
         if(rowForFour.every(index => squares[index].style.backgroundImage === decidedColor && !isBlank)){
-            score =+ 3;
+            score =+ 4;
             rowForFour.forEach(index => {
                 squares[index].style.backgroundImage = "";
             })
@@ -161,11 +177,17 @@ checkColumnForFour = () => {
         let decidedColor = squares[i].style.backgroundImage;
         const isBlank = squares[i].style.backgroundImage === "";
 
+        
+
         if(columnForFour.every(index => squares[index].style.backgroundImage === decidedColor && !isBlank)) {
-            score =+ 3;
+            score =+ 4;
             columnForFour.forEach(index => {
                 squares[index].style.backgroundImage = "";
             })
+        }
+
+        if(columnForFour === true) {
+            let gameScore = document.querySelector(".score").innerText = score;
         }
     }
 }
@@ -173,12 +195,12 @@ checkColumnForFour = () => {
 checkColumnForFour();
 
 
-// Generating radom candies
-let randomCandies = Math.floor(Math.random() * candyColors.length);
+
 
 
 
 window.setInterval(function(){
+    moveDown()
     checkColumnForFour();
     checkRowForFour();
     checkColumnForThree()
