@@ -1,3 +1,7 @@
+body {
+    background: url(image/candy-crush-background-2.png);
+    background-size: cover;
+}
 
 .grid {
     width: 560px;
@@ -5,9 +9,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    border: 5px solid rgb(185, 185, 185);
-    border-radius: 5px;
-    
+    border: 5px solid rgb(148, 155, 161);
+    border-radius: 15px;
+    justify-content: center;
     align-content: center;
     margin: 0 auto
 }
