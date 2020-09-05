@@ -2,6 +2,7 @@ const grid = document.querySelector(".grid");
 const width = 8;
 const squares = [];
 let score = 0;
+let scoreDisplay = document.getElementById("score");
 
 const candyColors = [
     "url(image/alternative-red.png)", 
@@ -106,7 +107,7 @@ function moveDown(){
             const isFirstRow = firstRow.includes(i);
             if(isFirstRow && squares[i].style.backgroundImage === ""){
                 let randomCandies = Math.floor(Math.random() * candyColors.length);
-                squares[i].style.backgroundImage = candyColors[randomCandies]
+                squares[i].style.backgroundImage = candyColors[randomCandies];
             }
         }
     }
@@ -124,7 +125,8 @@ checkRowForThree = () => {
         if(notValid.includes(i)) continue;
 
         if(rowForThree.every(index => squares[index].style.backgroundImage === decidedColor && !isBlank)){
-            score =+ 3;
+            score += 3;
+            scoreDisplay.innerHTML = score;
             rowForThree.forEach(index => {
                 squares[index].style.backgroundImage = "";
             })
@@ -141,7 +143,8 @@ checkColumnForThree = () => {
         const isBlank = squares[i].style.backgroundImage === "";
 
         if(columnForThree.every(index => squares[index].style.backgroundImage === decidedColor && !isBlank)) {
-            score =+ 3;
+            score += 3;
+            scoreDisplay.innerHTML = score;
             columnForThree.forEach(index => {
                 squares[index].style.backgroundImage = "";
             })
@@ -149,7 +152,7 @@ checkColumnForThree = () => {
     }
 }
 
-checkColumnForThree()
+checkColumnForThree();
 
 // Check for four
 checkRowForFour = () => {
@@ -161,7 +164,8 @@ checkRowForFour = () => {
         if(notValid.includes(i)) continue;
 
         if(rowForFour.every(index => squares[index].style.backgroundImage === decidedColor && !isBlank)){
-            score =+ 4;
+            score += 4;
+            scoreDisplay.innerHTML = score;
             rowForFour.forEach(index => {
                 squares[index].style.backgroundImage = "";
             })
@@ -180,7 +184,8 @@ checkColumnForFour = () => {
         
 
         if(columnForFour.every(index => squares[index].style.backgroundImage === decidedColor && !isBlank)) {
-            score =+ 4;
+            score += 4;
+            scoreDisplay.innerHTML = score;
             columnForFour.forEach(index => {
                 squares[index].style.backgroundImage = "";
             })
